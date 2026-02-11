@@ -433,7 +433,11 @@ runs:
             elif [[ "$SOFA_OS_GITHUB" == "macOS" ]]; then
               SOFA_OS_GITHUB="MacOS"
             fi
-            url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}.zip
+            if [[ "$RUNNER_OS" == "Linux" ]]; then
+              url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}-Python_${{ inputs.python_version }}.zip
+            else
+              url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}.zip
+            fi
             mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries"
             echo "Getting SOFA from $url"
             curl --output "${{ runner.temp }}/sofa_tmp/zip/sofa.zip" -L $url
