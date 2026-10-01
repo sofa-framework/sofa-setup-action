@@ -432,7 +432,7 @@ runs:
             # Release was not found on GitHub, try to get it from Jenkins
             python3 $WORKSPACE_CI_PATH/scripts/getLatestSOFANightly.py ${{ github.token }} "${{ runner.temp }}/sofa_tmp/" --os ${ARTIFACT_OS} -n 1 -b ${{ inputs.sofa_version }} -e any
 
-            unzip -qq ${{ runner.temp }}/sofa_tmp/latest/${ARTIFACT_OS}/SOFA_* -d "${{ runner.temp }}/sofa_tmp/binaries"
+            unzip -qq "${{ runner.temp }}"/sofa_tmp/latest/${ARTIFACT_OS}/SOFA_* -d "${{ runner.temp }}/sofa_tmp/binaries"
             $SUDO mkdir -p "${{ inputs.sofa_root }}"
             $SUDO mv "${{ runner.temp }}"/sofa_tmp/binaries/SOFA_*/* "${{ inputs.sofa_root }}"
 
