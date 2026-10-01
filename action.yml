@@ -16,7 +16,7 @@ inputs:
     default: 'true'
   python_version:
     description: 'Python version to install'
-    default: '3.10'
+    default: '3.12'
   numpy_version:
     description: 'numpy version to install'
     default: 'latest'
@@ -259,7 +259,7 @@ runs:
         echo "----------------------------------"
 
         # Upgrade pip
-        $PYTHON_EXE -m pip install --upgrade pip
+        $PYTHON_EXE -m pip install --upgrade pip --break-system-packages
 
         # Set SOFA_VERSION_FOR_DEPS
         SOFA_VERSION_FOR_DEPS="$(echo "${{ inputs.sofa_version }}" | sed 's:[^0-9]*::g')"
@@ -272,14 +272,14 @@ runs:
       shell: bash
       run: |
         if [[ "${{ inputs.numpy_version }}" == "latest" ]]; then
-            $PYTHON_EXE -m pip install numpy requests
+            $PYTHON_EXE -m pip install numpy requests --break-system-packages
         else
-            $PYTHON_EXE -m pip install numpy==${{ inputs.numpy_version }} requests
+            $PYTHON_EXE -m pip install numpy==${{ inputs.numpy_version }} requests --break-system-packages
         fi
         if [[ "${{ inputs.scipy_version }}" == "latest" ]]; then
-            $PYTHON_EXE -m pip install scipy requests
+            $PYTHON_EXE -m pip install scipy requests --break-system-packages
         else
-            $PYTHON_EXE -m pip install scipy==${{ inputs.scipy_version }} requests
+            $PYTHON_EXE -m pip install scipy==${{ inputs.scipy_version }} requests --break-system-packages
         fi
         echo '---- pip show numpy scipy ----'
         $PYTHON_EXE -m pip show numpy scipy requests
@@ -295,7 +295,7 @@ runs:
     - name: Install pybind11 ${{ inputs.pybind11_version }}
       shell: bash
       run: |
-        $PYTHON_EXE -m pip install pybind11==${{ inputs.pybind11_version }}
+        $PYTHON_EXE -m pip install pybind11==${{ inputs.pybind11_version }} --break-system-packages
         pybind11_DIR="pybind11-dir-not-found"
         if [ -e "$(command -v pybind11-config)" ]; then
           pybind11_DIR="$(pybind11-config --cmakedir)"
