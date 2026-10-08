@@ -410,7 +410,7 @@ runs:
               SOFA_OS_GITHUB="MacOS"
             fi
             if [[ "$RUNNER_OS" == "Linux" ]]; then
-              url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}-Python_${{ inputs.python_version }}.zip
+              url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}_Python_${{ inputs.python_version }}.zip
             else
               url=https://github.com/sofa-framework/sofa/releases/download/${{ steps.get_sofa_from_github.outputs.tag_name }}/SOFA_${{ steps.get_sofa_from_github.outputs.tag_name }}_${SOFA_OS_GITHUB}.zip
             fi
