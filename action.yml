@@ -421,7 +421,7 @@ runs:
             echo "sofa_version=${{ steps.get_sofa_from_github.outputs.tag_name }}" >> $GITHUB_OUTPUT
 
           else
-            ARTIFACT_OS=${RUNNER_OS,,}
+            ARTIFACT_OS=$(echo "$RUNNER_OS" | tr '[:upper:]' '[:lower:]')
             if [[ "$ARTIFACT_OS" == "linux" ]]; then
                 ARTIFACT_OS=ubuntu
             fi

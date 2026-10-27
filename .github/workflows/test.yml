@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-22.04, macos-14, windows-2022]
+        os: [ubuntu-24.04, macos-15, windows-latest]
         sofa_branch: [master, v24.12]
 
     steps:
@@ -46,7 +46,7 @@ jobs:
           echo "----------------------------"
           cat '${{ runner.temp }}'/_runner_file_commands/add_path*
           echo "----------------------------"
-          
+
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             echo "----------------------------"
             cmd //c 'echo EIGEN3_ROOT=%EIGEN3_ROOT%'
